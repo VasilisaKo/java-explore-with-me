@@ -3,7 +3,7 @@ package ru.practicum.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.model.EndpointHit;
-import ru.practicum.model.ViewStatsDto;
+import model.ViewStatsDto;
 import ru.practicum.repository.StatRepository;
 
 import java.time.LocalDateTime;

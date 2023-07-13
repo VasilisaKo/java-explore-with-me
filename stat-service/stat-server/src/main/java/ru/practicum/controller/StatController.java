@@ -8,8 +8,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dtoMapper.EndpointHitMapper;
 import ru.practicum.model.EndpointHit;
-import ru.practicum.model.EndpointHitDto;
-import ru.practicum.model.ViewStatsDto;
+import model.EndpointHitDto;
+import model.ViewStatsDto;
 import ru.practicum.service.StatService;
 
 import java.time.LocalDateTime;
