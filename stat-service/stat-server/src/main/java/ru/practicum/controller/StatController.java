@@ -37,6 +37,6 @@ public class StatController {
         if (start.isAfter(end)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        return ResponseEntity.status(HttpStatus.OK).body(statsService.getViewStats(start, end, uris, unique));
+        return ResponseEntity.status(HttpStatus.CREATED).body(statsService.getViewStats(start, end, uris, unique));
     }
 }
