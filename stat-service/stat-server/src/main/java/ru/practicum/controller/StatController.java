@@ -23,6 +23,7 @@ public class StatController {
     private final StatService statsService;
 
     @PostMapping(value = "/hit")
+    @ResponseStatus(HttpStatus.CREATED)
     public EndpointHitDto saveEndpointHit(@RequestBody EndpointHitDto dto) {
         EndpointHit endpointHit = EndpointHitMapper.toEntity(dto);
         endpointHit = statsService.saveEndpointHit(endpointHit);
