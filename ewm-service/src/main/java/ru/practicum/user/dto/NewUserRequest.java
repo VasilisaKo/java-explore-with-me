@@ -21,5 +21,6 @@ public class NewUserRequest {
 
     @Size(min = 6, max = 254)
     @Email
+    @NotBlank(message = "Email cannot be empty")
     String email;
 }
