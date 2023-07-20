@@ -78,7 +78,7 @@ public class CompilationService {
         if (dto.getTitle() != null) {
             compilation.setTitle(dto.getTitle());
         }
-        if (!dto.getEvents().isEmpty() || dto.getEvents().size() != 0) {
+        if (dto.getEvents().size() != 0) {
             List<Event> events = eventPublicService.findEventsById(dto.getEvents());
             compilation.setEvents(events);
         }

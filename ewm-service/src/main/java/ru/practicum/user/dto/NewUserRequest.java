@@ -2,8 +2,8 @@ package ru.practicum.user.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import ru.practicum.validator.EmailValidation;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -20,6 +20,6 @@ public class NewUserRequest {
     String name;
 
     @Size(min = 6, max = 254)
-    @EmailValidation
+    @Email
     String email;
 }
