@@ -1,0 +1,1634 @@
+{
+  "info": {
+    "_postman_id": "2041278f-78a4-4145-8e95-64eb851117f2",
+    "name": "Test comments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27887684"
+  },
+  "item": [
+    {
+      "name": "Category 1 create",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 or 201\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+              "});",
+              "pm.test(\"Has user create response\", function () {",
+              "    pm.response.to.be.withBody;",
+              "    pm.response.to.be.json;",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"category\"\n\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/categories",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Event 1 create",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 or 201\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+              "});",
+              "pm.test(\"Has user create response\", function () {",
+              "    pm.response.to.be.withBody;",
+              "    pm.response.to.be.json;",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"annotation\": \"annotationannotationannotationannotation\",\n    \"category\": \"1\",\n    \"description\": \"descriptiondescriptiondescriptiondescription\",\n    \"eventDate\": \"2024-05-15 22:22:22\",\n    \"location\": {\n        \"lat\": \"165\",\n        \"lon\": \"242\"\n    },\n    \"paid\": \"false\",\n    \"participantLimit\": \"10\",\n    \"requestModeration\": \"false\",\n    \"title\": \"title\"\n\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/1/events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            "1",
+            "events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 1 create",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 or 201\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Has user create response\", function () {\r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});\r",
+              "pm.test(\"Test comment 'id' field\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.have.property('id');\r",
+              "    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"content\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments?userId=1&eventId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment create fail empty content",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([400]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments?userId=1&eventId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment create fail wrong user",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404 or 400\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments?userId=10&eventId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "10"
+            },
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment create fail wrong event",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404 or 400\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments?userId=1&eventId=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "eventId",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 1 patch",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const main = async () => {\r",
+              "    const api = new API(pm);\r",
+              "    const rnd = new RandomUtils();\r",
+              "\r",
+              "    let comment;\r",
+              "    try {\r",
+              "\r",
+              "        const user1 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid1\", user1.id)\r",
+              "        const user2 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid2\", user2.id)\r",
+              "        const user3 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid3\", user3.id)\r",
+              "        const user = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid\", user.id)\r",
+              "        const category = await api.addCategory(rnd.getCategory());\r",
+              "        const event = await api.addEvent(user1.id, rnd.getEvent(category.id));\r",
+              "        event = await api.publishEvent(event.id);\r",
+              "        pm.collectionVariables.set('eid', event.id);\r",
+              "        const request2 = await api.publishParticipationRequest(event.id, user2.id);\r",
+              "        const request3 = await api.publishParticipationRequest(event.id, user3.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user2.id, request2.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user3.id, request3.id);\r",
+              "        const request = await api.publishParticipationRequest(event.id, user.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user.id, request.id);\r",
+              "        const url2=\"http://localhost:8080/users/\"+user2.id+\"/events/\"+event.id+\"/comment\";\r",
+              "        const comment = await api.addComment(rnd.getComment());\r",
+              "        pm.sendRequest({\r",
+              "            url : url2,\r",
+              "            method : \"POST\",\r",
+              "            header: { \"Content-Type\": \"application/json\" }\r",
+              "        }, (error, response) => {\r",
+              "            pm.sendRequest({\r",
+              "                url : url3,\r",
+              "                method : \"POST\",\r",
+              "                header: { \"Content-Type\": \"application/json\" }\r",
+              "            }, (error, response) => {\r",
+              "                pm.collectionVariables.set('source3', response.json());\r",
+              "            });\r",
+              "        });\r",
+              "\r",
+              "\r",
+              "\r",
+              "    } catch(err) {\r",
+              "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+              "    }\r",
+              "\r",
+              "    pm.request.body.update({\r",
+              "        mode: 'raw',\r",
+              "        raw: JSON.stringify(event),\r",
+              "        options: { raw: { language: 'json' } }\r",
+              "    });\r",
+              "};\r",
+              "\r",
+              "const interval = setInterval(() => {}, 1000);\r",
+              "\r",
+              "setTimeout(async () => \r",
+              "    {\r",
+              "        try {\r",
+              "            await main();\r",
+              "        } catch (e) {\r",
+              "            console.error(e);\r",
+              "        } finally {\r",
+              "            clearInterval(interval);\r",
+              "        }\r",
+              "    },  \r",
+              "    100 \r",
+              ");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 or 201\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Has user create response\", function () {\r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});\r",
+              "pm.test(\"Test comment 'id' field\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.have.property('id');\r",
+              "    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);\r",
+              "});\r",
+              "pm.test(\"Test comment 'content' field\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.have.property('content');\r",
+              "    pm.expect(jsonData.content, '\"comment\" must be \"updated content.\"').to.eql(\"updated content.\");\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"updated content.\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId/?userId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId",
+            ""
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "1"
+            }
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 1 patch fail duplicate content",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const main = async () => {\r",
+              "    const api = new API(pm);\r",
+              "    const rnd = new RandomUtils();\r",
+              "\r",
+              "    let comment;\r",
+              "    try {\r",
+              "\r",
+              "        const user1 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid1\", user1.id)\r",
+              "        const user2 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid2\", user2.id)\r",
+              "        const user3 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid3\", user3.id)\r",
+              "        const user = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid\", user.id)\r",
+              "        const category = await api.addCategory(rnd.getCategory());\r",
+              "        const event = await api.addEvent(user1.id, rnd.getEvent(category.id));\r",
+              "        event = await api.publishEvent(event.id);\r",
+              "        pm.collectionVariables.set('eid', event.id);\r",
+              "        const request2 = await api.publishParticipationRequest(event.id, user2.id);\r",
+              "        const request3 = await api.publishParticipationRequest(event.id, user3.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user2.id, request2.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user3.id, request3.id);\r",
+              "        const request = await api.publishParticipationRequest(event.id, user.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user.id, request.id);\r",
+              "        const url2=\"http://localhost:8080/users/\"+user2.id+\"/events/\"+event.id+\"/comment\";\r",
+              "        const comment = await api.addComment(rnd.getComment());\r",
+              "        pm.sendRequest({\r",
+              "            url : url2,\r",
+              "            method : \"POST\",\r",
+              "            header: { \"Content-Type\": \"application/json\" }\r",
+              "        }, (error, response) => {\r",
+              "            pm.sendRequest({\r",
+              "                url : url3,\r",
+              "                method : \"POST\",\r",
+              "                header: { \"Content-Type\": \"application/json\" }\r",
+              "            }, (error, response) => {\r",
+              "                pm.collectionVariables.set('source3', response.json());\r",
+              "            });\r",
+              "        });\r",
+              "\r",
+              "\r",
+              "\r",
+              "    } catch(err) {\r",
+              "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+              "    }\r",
+              "\r",
+              "    pm.request.body.update({\r",
+              "        mode: 'raw',\r",
+              "        raw: JSON.stringify(event),\r",
+              "        options: { raw: { language: 'json' } }\r",
+              "    });\r",
+              "};\r",
+              "\r",
+              "const interval = setInterval(() => {}, 1000);\r",
+              "\r",
+              "setTimeout(async () => \r",
+              "    {\r",
+              "        try {\r",
+              "            await main();\r",
+              "        } catch (e) {\r",
+              "            console.error(e);\r",
+              "        } finally {\r",
+              "            clearInterval(interval);\r",
+              "        }\r",
+              "    },  \r",
+              "    100 \r",
+              ");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 409\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([409]);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"updated content.\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId/?userId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId",
+            ""
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "1"
+            }
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 1 patch fail empty content",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const main = async () => {\r",
+              "    const api = new API(pm);\r",
+              "    const rnd = new RandomUtils();\r",
+              "\r",
+              "    let comment;\r",
+              "    try {\r",
+              "\r",
+              "        const user1 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid1\", user1.id)\r",
+              "        const user2 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid2\", user2.id)\r",
+              "        const user3 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid3\", user3.id)\r",
+              "        const user = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid\", user.id)\r",
+              "        const category = await api.addCategory(rnd.getCategory());\r",
+              "        const event = await api.addEvent(user1.id, rnd.getEvent(category.id));\r",
+              "        event = await api.publishEvent(event.id);\r",
+              "        pm.collectionVariables.set('eid', event.id);\r",
+              "        const request2 = await api.publishParticipationRequest(event.id, user2.id);\r",
+              "        const request3 = await api.publishParticipationRequest(event.id, user3.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user2.id, request2.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user3.id, request3.id);\r",
+              "        const request = await api.publishParticipationRequest(event.id, user.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user.id, request.id);\r",
+              "        const url2=\"http://localhost:8080/users/\"+user2.id+\"/events/\"+event.id+\"/comment\";\r",
+              "        const comment = await api.addComment(rnd.getComment());\r",
+              "        pm.sendRequest({\r",
+              "            url : url2,\r",
+              "            method : \"POST\",\r",
+              "            header: { \"Content-Type\": \"application/json\" }\r",
+              "        }, (error, response) => {\r",
+              "            pm.sendRequest({\r",
+              "                url : url3,\r",
+              "                method : \"POST\",\r",
+              "                header: { \"Content-Type\": \"application/json\" }\r",
+              "            }, (error, response) => {\r",
+              "                pm.collectionVariables.set('source3', response.json());\r",
+              "            });\r",
+              "        });\r",
+              "\r",
+              "\r",
+              "\r",
+              "    } catch(err) {\r",
+              "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+              "    }\r",
+              "\r",
+              "    pm.request.body.update({\r",
+              "        mode: 'raw',\r",
+              "        raw: JSON.stringify(event),\r",
+              "        options: { raw: { language: 'json' } }\r",
+              "    });\r",
+              "};\r",
+              "\r",
+              "const interval = setInterval(() => {}, 1000);\r",
+              "\r",
+              "setTimeout(async () => \r",
+              "    {\r",
+              "        try {\r",
+              "            await main();\r",
+              "        } catch (e) {\r",
+              "            console.error(e);\r",
+              "        } finally {\r",
+              "            clearInterval(interval);\r",
+              "        }\r",
+              "    },  \r",
+              "    100 \r",
+              ");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([400]);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId/?userId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId",
+            ""
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "1"
+            }
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 1 patch fail wrong userId",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const main = async () => {\r",
+              "    const api = new API(pm);\r",
+              "    const rnd = new RandomUtils();\r",
+              "\r",
+              "    let comment;\r",
+              "    try {\r",
+              "\r",
+              "        const user1 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid1\", user1.id)\r",
+              "        const user2 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid2\", user2.id)\r",
+              "        const user3 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid3\", user3.id)\r",
+              "        const user = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid\", user.id)\r",
+              "        const category = await api.addCategory(rnd.getCategory());\r",
+              "        const event = await api.addEvent(user1.id, rnd.getEvent(category.id));\r",
+              "        event = await api.publishEvent(event.id);\r",
+              "        pm.collectionVariables.set('eid', event.id);\r",
+              "        const request2 = await api.publishParticipationRequest(event.id, user2.id);\r",
+              "        const request3 = await api.publishParticipationRequest(event.id, user3.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user2.id, request2.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user3.id, request3.id);\r",
+              "        const request = await api.publishParticipationRequest(event.id, user.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user.id, request.id);\r",
+              "        const url2=\"http://localhost:8080/users/\"+user2.id+\"/events/\"+event.id+\"/comment\";\r",
+              "        const comment = await api.addComment(rnd.getComment());\r",
+              "        pm.sendRequest({\r",
+              "            url : url2,\r",
+              "            method : \"POST\",\r",
+              "            header: { \"Content-Type\": \"application/json\" }\r",
+              "        }, (error, response) => {\r",
+              "            pm.sendRequest({\r",
+              "                url : url3,\r",
+              "                method : \"POST\",\r",
+              "                header: { \"Content-Type\": \"application/json\" }\r",
+              "            }, (error, response) => {\r",
+              "                pm.collectionVariables.set('source3', response.json());\r",
+              "            });\r",
+              "        });\r",
+              "\r",
+              "\r",
+              "\r",
+              "    } catch(err) {\r",
+              "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+              "    }\r",
+              "\r",
+              "    pm.request.body.update({\r",
+              "        mode: 'raw',\r",
+              "        raw: JSON.stringify(event),\r",
+              "        options: { raw: { language: 'json' } }\r",
+              "    });\r",
+              "};\r",
+              "\r",
+              "const interval = setInterval(() => {}, 1000);\r",
+              "\r",
+              "setTimeout(async () => \r",
+              "    {\r",
+              "        try {\r",
+              "            await main();\r",
+              "        } catch (e) {\r",
+              "            console.error(e);\r",
+              "        } finally {\r",
+              "            clearInterval(interval);\r",
+              "        }\r",
+              "    },  \r",
+              "    100 \r",
+              ");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404 or 400\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"content\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId/?userId=100",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId",
+            ""
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "100"
+            }
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Event 2 create",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 or 201\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+              "});",
+              "pm.test(\"Has user create response\", function () {",
+              "    pm.response.to.be.withBody;",
+              "    pm.response.to.be.json;",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"annotation\": \"annotationannotationannotationannotation22\",\n    \"category\": \"1\",\n    \"description\": \"descriptiondescriptiondescriptiondescription22\",\n    \"eventDate\": \"2024-06-15 22:22:22\",\n    \"location\": {\n        \"lat\": \"165\",\n        \"lon\": \"242\"\n    },\n    \"paid\": \"false\",\n    \"participantLimit\": \"10\",\n    \"requestModeration\": \"false\",\n    \"title\": \"title\"\n\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/2/events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            "2",
+            "events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 2 create",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 or 201\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Has user create response\", function () {\r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});\r",
+              "pm.test(\"Test comment 'id' field\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.have.property('id');\r",
+              "    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"content2\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments?userId=2&eventId=2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "2"
+            },
+            {
+              "key": "eventId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 3 create",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 or 201\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Has user create response\", function () {\r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});\r",
+              "pm.test(\"Test comment 'id' field\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.have.property('id');\r",
+              "    pm.expect(jsonData.id, '\"id\" must be 3').to.eql(3);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"content3\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments?userId=2&eventId=2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "2"
+            },
+            {
+              "key": "eventId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Comment 3",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 or 201\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+              "});\r",
+              "pm.test(\"Has comment get response\", function () {\r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});\r",
+              "pm.test(\"Test comment 'id' field\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.have.property('id');\r",
+              "    pm.expect(jsonData.id, '\"id\" must be 3').to.eql(3);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 1 patch fail userId 2",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const main = async () => {\r",
+              "    const api = new API(pm);\r",
+              "    const rnd = new RandomUtils();\r",
+              "\r",
+              "    let comment;\r",
+              "    try {\r",
+              "\r",
+              "        const user1 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid1\", user1.id)\r",
+              "        const user2 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid2\", user2.id)\r",
+              "        const user3 = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid3\", user3.id)\r",
+              "        const user = await api.addUser(rnd.getUser());\r",
+              "        pm.collectionVariables.set(\"uid\", user.id)\r",
+              "        const category = await api.addCategory(rnd.getCategory());\r",
+              "        const event = await api.addEvent(user1.id, rnd.getEvent(category.id));\r",
+              "        event = await api.publishEvent(event.id);\r",
+              "        pm.collectionVariables.set('eid', event.id);\r",
+              "        const request2 = await api.publishParticipationRequest(event.id, user2.id);\r",
+              "        const request3 = await api.publishParticipationRequest(event.id, user3.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user2.id, request2.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user3.id, request3.id);\r",
+              "        const request = await api.publishParticipationRequest(event.id, user.id);\r",
+              "        await api.acceptParticipationRequest(event.id, user.id, request.id);\r",
+              "        const url2=\"http://localhost:8080/users/\"+user2.id+\"/events/\"+event.id+\"/comment\";\r",
+              "        const comment = await api.addComment(rnd.getComment());\r",
+              "        pm.sendRequest({\r",
+              "            url : url2,\r",
+              "            method : \"POST\",\r",
+              "            header: { \"Content-Type\": \"application/json\" }\r",
+              "        }, (error, response) => {\r",
+              "            pm.sendRequest({\r",
+              "                url : url3,\r",
+              "                method : \"POST\",\r",
+              "                header: { \"Content-Type\": \"application/json\" }\r",
+              "            }, (error, response) => {\r",
+              "                pm.collectionVariables.set('source3', response.json());\r",
+              "            });\r",
+              "        });\r",
+              "\r",
+              "\r",
+              "\r",
+              "    } catch(err) {\r",
+              "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+              "    }\r",
+              "\r",
+              "    pm.request.body.update({\r",
+              "        mode: 'raw',\r",
+              "        raw: JSON.stringify(event),\r",
+              "        options: { raw: { language: 'json' } }\r",
+              "    });\r",
+              "};\r",
+              "\r",
+              "const interval = setInterval(() => {}, 1000);\r",
+              "\r",
+              "setTimeout(async () => \r",
+              "    {\r",
+              "        try {\r",
+              "            await main();\r",
+              "        } catch (e) {\r",
+              "            console.error(e);\r",
+              "        } finally {\r",
+              "            clearInterval(interval);\r",
+              "        }\r",
+              "    },  \r",
+              "    100 \r",
+              ");"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([400]);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"content fail\"\r\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId/?userId=2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId",
+            ""
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "2"
+            }
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comments get all",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.be.ok;",
+              "});",
+              "pm.test(\"Test list user response\", function () {",
+              "    pm.response.to.be.withBody;",
+              "    pm.response.to.be.json;",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.length, 'List length must be 3').to.eql(3);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comments get all for event 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.be.ok;",
+              "});",
+              "pm.test(\"Test list comment response\", function () {",
+              "    pm.response.to.be.withBody;",
+              "    pm.response.to.be.json;",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/events/:eventId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "eventId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comments get all for user 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.be.ok;",
+              "});",
+              "pm.test(\"Test list comment response\", function () {",
+              "    pm.response.to.be.withBody;",
+              "    pm.response.to.be.json;",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/users/:userId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            "users",
+            ":userId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 3 delete fail wrong user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 409\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([409]);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId?userId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "1"
+            }
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comment 3 delete",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments/:commentId?userId=2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments",
+            ":commentId"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "2"
+            }
+          ],
+          "variable": [
+            {
+              "key": "commentId",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comments get all after delete",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.be.ok;",
+              "});",
+              "pm.test(\"Test list user response\", function () {",
+              "    pm.response.to.be.withBody;",
+              "    pm.response.to.be.json;",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.length, 'List length must be 2').to.eql(2);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comments",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
