@@ -50,10 +50,12 @@ public class EventPrivateService {
 
     public EventFullDto saveEvent(NewEventDto dto, Long userId) {
         if (dto.getEventDate().isBefore(LocalDateTime.now())) {
-            throw new ConflictException("Field: eventDate. Error: Должно содержать дату, которая еще не наступила. Value:" + dto.getEventDate());
+            throw new ConflictException("Field: eventDate. Error: Должно содержать дату, которая еще не наступила. " +
+                    "Value:" + dto.getEventDate());
         }
         if (dto.getEventDate().isBefore(LocalDateTime.now().plusHours(2L))) {
-            throw new BadRequestException("Field: eventDate. Error: Дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента. Value:" + dto.getEventDate());
+            throw new BadRequestException("Field: eventDate. Error: Дата и время на которые намечено событие не может " +
+                    "быть раньше, чем через два часа от текущего момента. Value:" + dto.getEventDate());
         }
         Category category = categoryService.findById(dto.getCategory());
         User initiator = userService.findById(userId);
@@ -86,14 +88,16 @@ public class EventPrivateService {
 
     public EventFullDto getEventById(Long userId, Long eventId) {
         User initiator = userService.findById(userId);
-        eventRepository.findById(eventId).orElseThrow(() -> new ObjectNotFoundException("Event with id=" + eventId + " was not found"));
+        eventRepository.findById(eventId).orElseThrow(() -> new ObjectNotFoundException("Event with id=" + eventId +
+                " was not found"));
         Event event = eventRepository.findByInitiatorIdAndId(initiator.getId(), eventId);
         return EventMapper.toFullDto(event);
     }
 
     public EventFullDto patchEvent(UpdateEventUserRequest dto, Long userId, Long eventId) {
         User initiator = userService.findById(userId);
-        eventRepository.findById(eventId).orElseThrow(() -> new ObjectNotFoundException("Event with id=" + eventId + " was not found"));
+        eventRepository.findById(eventId).orElseThrow(() -> new ObjectNotFoundException("Event with id=" + eventId +
+                " was not found"));
         Event event = eventRepository.findByInitiatorIdAndId(initiator.getId(), eventId);
         if (dto.getEventDate() != null) {
             if (dto.getEventDate().isBefore(LocalDateTime.now().plusHours(2L)) && dto.getEventDate() != null) {
